@@ -330,7 +330,9 @@ function AboutPage() {
 
 // --- หน้าพิพิธภัณฑ์ตำรวจ (Museum) ---
 function MuseumPage() {
-  // ข้อมูล 5 อย่างของคุณ
+  const [currentPdf, setCurrentPdf] = useState("/files/project_1.pdf");
+  const [activeTitle, setActiveTitle] = useState("1. โครงการปรับปรุงเพื่ออนุรักษ์หอประชุมตำรวจจังหวัดน่าน");
+
   const museumFiles = [
     { id: 1, title: "1. โครงการปรับปรุงเพื่ออนุรักษ์หอประชุมตำรวจจังหวัดน่าน", file: "/files/project_1.pdf" },
     { id: 2, title: "2. ประวัติเรือนเจ้าราชบุตร (หมอกฟ้า)", file: "/files/history_2.pdf" },
@@ -339,35 +341,44 @@ function MuseumPage() {
     { id: 5, title: "5. พิธีหล่อพระมุนินทร์พิทักษ์บูรพาณาเขต", file: "/files/ceremony_5.pdf" }
   ];
 
-  return (
-    <div style={{ maxWidth: '1000px', margin: '40px auto', padding: '0 20px' }}>
-      {/* ... ส่วนเนื้อหาเดิม (ประวัติและนิทรรศการ) ของคุณคงไว้เหมือนเดิม ... */}
+  const handleSelect = (item) => {
+    setCurrentPdf(item.file);
+    setActiveTitle(item.title);
+  };
 
-      {/* ส่วนแสดงรายการ PDF 5 อย่าง */}
-      <div style={{ marginTop: '50px' }}>
-        <h3 style={{ color: '#1C3D5A', marginBottom: '20px', borderBottom: '2px solid #D4AF37', paddingBottom: '10px' }}>
-          📖 เอกสารประกอบพิพิธภัณฑ์
-        </h3>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+  return (
+    <div style={{ maxWidth: '1100px', margin: '40px auto', padding: '0 20px', fontFamily: '"Sarabun", sans-serif' }}>
+      <h2 style={{ color: '#1C3D5A', textAlign: 'center', borderBottom: '3px solid #D4AF37', paddingBottom: '10px' }}>
+        พิพิธภัณฑ์ตำรวจน่าน (Nan Police Museum)
+      </h2>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '30px' }}>
+        {/* เมนูเลือก PDF */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
           {museumFiles.map((item) => (
-            <a 
+            <button 
               key={item.id} 
-              href={item.file} 
-              target="_blank" 
-              rel="noopener noreferrer"
+              onClick={() => handleSelect(item)}
               style={{ 
-                display: 'flex', alignItems: 'center', padding: '15px', 
-                backgroundColor: '#f8f9fa', border: '1px solid #dee2e6', 
-                borderRadius: '8px', textDecoration: 'none', color: '#333',
-                fontSize: '16px', fontWeight: '500', transition: '0.3s'
+                padding: '10px 15px', 
+                backgroundColor: currentPdf === item.file ? '#8B0000' : '#1C3D5A', 
+                color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '14px' 
               }}
-              onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#e9ecef'}
-              onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f8f9fa'}
             >
-              <span style={{ marginRight: '15px', fontSize: '24px' }}>📄</span>
-              {item.title}
-            </a>
+              {item.title.split('.')[0]} {/* แสดงเลขหัวข้อ */}
+            </button>
           ))}
+        </div>
+
+        {/* ส่วนแสดง PDF Viewer */}
+        <div style={{ backgroundColor: '#333', padding: '10px', borderRadius: '8px', minHeight: '700px' }}>
+          <h4 style={{ color: 'white', margin: '0 0 10px 10px' }}>กำลังแสดง: {activeTitle}</h4>
+          <iframe 
+            src={currentPdf} 
+            width="100%" 
+            height="700px" 
+            style={{ borderRadius: '4px' }}
+          />
         </div>
       </div>
     </div>
