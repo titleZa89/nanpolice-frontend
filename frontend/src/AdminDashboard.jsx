@@ -6,21 +6,17 @@ import AddAnnouncement from './AddAnnouncement';
 function AdminDashboard({ setIsAdmin }) {
     const navigate = useNavigate();
     const [news, setNews] = useState([]);
-    const [editingNews, setEditingNews] = useState(null); // สำหรับเก็บข้อมูลตัวที่กำลังแก้
+    const [editingNews, setEditingNews] = useState(null); // เก็บข้อมูลตัวที่แก้
 
-    // ดึงข้อมูลข่าวทั้งหมดมาแสดง
     const fetchNews = async () => {
         try {
             const res = await axios.get('https://nanpolice-api.onrender.com/api/announcements');
             setNews(res.data);
-        } catch (err) {
-            console.error(err);
-        }
+        } catch (err) { console.error(err); }
     };
 
     useEffect(() => { fetchNews(); }, []);
 
-    // ฟังก์ชันลบข่าว
     const handleDelete = async (id) => {
         if (window.confirm('ต้องการลบข่าวนี้ใช่หรือไม่?')) {
             try {
@@ -28,73 +24,53 @@ function AdminDashboard({ setIsAdmin }) {
                 await axios.delete(`https://nanpolice-api.onrender.com/api/announcements/${id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
-                alert('ลบสำเร็จ');
-                fetchNews(); // โหลดข้อมูลใหม่
-            } catch (err) {
-                alert('ลบข้อมูลไม่สำเร็จ');
-            }
+                fetchNews();
+            } catch (err) { alert('ลบไม่สำเร็จ'); }
         }
     };
 
-    const handleLogout = () => {
-        if(window.confirm('คุณต้องการออกจากระบบใช่หรือไม่?')) {
-            localStorage.removeItem('token');
-            setIsAdmin(false);
-            navigate('/admin/login');
-        }
+    // ฟังก์ชันอัปเดตข้อมูล
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+        const token = localStorage.getItem('token');
+        const formData = new FormData(e.target);
+        
+        try {
+            await axios.put(`https://nanpolice-api.onrender.com/api/announcements/${editingNews.id}`, formData, {
+                headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
+            });
+            alert('แก้ไขสำเร็จ');
+            setEditingNews(null);
+            fetchNews();
+        } catch (err) { alert('แก้ไขไม่สำเร็จ'); }
     };
 
     return (
         <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f0f4f8', fontFamily: '"Sarabun", sans-serif' }}>
-            {/* Sidebar */}
+            {/* Sidebar คงเดิม */}
             <aside style={{ width: '260px', backgroundColor: '#1C3D5A', color: 'white', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ padding: '30px 20px', textAlign: 'center', backgroundColor: '#152d43' }}>
-                    <img src="/logo.png" style={{ width: '70px', marginBottom: '10px' }} />
                     <h2 style={{ fontSize: '18px', color: '#D4AF37' }}>ระบบจัดการหลังบ้าน</h2>
                 </div>
-                <nav style={{ flex: 1, padding: '20px 0' }}>
-                    <div style={{ padding: '15px 25px', backgroundColor: '#800000', borderLeft: '5px solid #D4AF37' }}>📢 จัดการข่าวประกาศ</div>
-                </nav>
                 <div style={{ padding: '20px' }}>
-                    <button onClick={handleLogout} style={{ width: '100%', padding: '10px', backgroundColor: '#ff6b6b', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>🚪 ออกจากระบบ</button>
+                    <button onClick={() => { localStorage.removeItem('token'); setIsAdmin(false); navigate('/admin/login'); }} style={{ width: '100%', padding: '10px', backgroundColor: '#ff6b6b', color: 'white', border: 'none', cursor: 'pointer' }}>🚪 ออกจากระบบ</button>
                 </div>
             </aside>
 
-            {/* Main Content */}
             <main style={{ flex: 1, padding: '30px' }}>
-                <header style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
-                    <h2 style={{ color: '#1C3D5A' }}>ส่วนจัดการเนื้อหา</h2>
-                </header>
+                <div style={{ marginBottom: '30px' }}><AddAnnouncement onAddSuccess={fetchNews} /></div>
 
-                <div style={{ marginBottom: '30px' }}>
-                    <AddAnnouncement onAddSuccess={fetchNews} />
-                </div>
-
-                {/* ตารางรายการข่าว */}
-                <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }}>
-                    <h3>รายการประกาศทั้งหมด ({news.length} รายการ)</h3>
-                    <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
-                        <thead>
-                            <tr style={{ backgroundColor: '#f8f9fa' }}>
-                                <th style={{ padding: '12px', borderBottom: '2px solid #dee2e6' }}>ลำดับ</th>
-                                <th style={{ padding: '12px', borderBottom: '2px solid #dee2e6' }}>หัวข้อ</th>
-                                <th style={{ padding: '12px', borderBottom: '2px solid #dee2e6' }}>จัดการ</th>
-                            </tr>
-                        </thead>
+                {/* ตารางข่าว */}
+                <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px' }}>
+                    <h3>รายการประกาศทั้งหมด</h3>
+                    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                         <tbody>
-                            {news.map((item, index) => (
-                                <tr key={item.id}>
-                                    <td style={{ padding: '10px', borderBottom: '1px solid #dee2e6', textAlign: 'center' }}>{index + 1}</td>
-                                    <td style={{ padding: '10px', borderBottom: '1px solid #dee2e6' }}>{item.title}</td>
-                                    <td style={{ padding: '10px', borderBottom: '1px solid #dee2e6', textAlign: 'center' }}>
-                                        <button 
-                                            style={{ marginRight: '10px', backgroundColor: '#ffc107', border: 'none', padding: '5px 10px', borderRadius: '4px', cursor: 'pointer' }}
-                                            onClick={() => alert('ฟังก์ชันแก้ไข: สร้างฟอร์ม Edit แล้วเรียก API PUT ไปที่ /api/announcements/'+item.id)}
-                                        >แก้ไข</button>
-                                        <button 
-                                            style={{ backgroundColor: '#dc3545', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '4px', cursor: 'pointer' }}
-                                            onClick={() => handleDelete(item.id)}
-                                        >ลบ</button>
+                            {news.map((item) => (
+                                <tr key={item.id} style={{ borderBottom: '1px solid #ddd' }}>
+                                    <td style={{ padding: '10px' }}>{item.title}</td>
+                                    <td style={{ padding: '10px', textAlign: 'right' }}>
+                                        <button onClick={() => setEditingNews(item)} style={{ marginRight: '10px', backgroundColor: '#ffc107', border: 'none', padding: '5px 10px', cursor: 'pointer' }}>แก้ไข</button>
+                                        <button onClick={() => handleDelete(item.id)} style={{ backgroundColor: '#dc3545', color: 'white', border: 'none', padding: '5px 10px', cursor: 'pointer' }}>ลบ</button>
                                     </td>
                                 </tr>
                             ))}
@@ -102,6 +78,23 @@ function AdminDashboard({ setIsAdmin }) {
                     </table>
                 </div>
             </main>
+
+            {/* ฟอร์มแก้ไข (Modal) */}
+            {editingNews && (
+                <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <form onSubmit={handleUpdate} style={{ backgroundColor: 'white', padding: '30px', borderRadius: '8px', width: '400px' }}>
+                        <h3>แก้ไขประกาศ</h3>
+                        <input name="title" defaultValue={editingNews.title} style={{ width: '100%', marginBottom: '10px' }} required />
+                        <textarea name="description" defaultValue={editingNews.description} style={{ width: '100%', height: '100px', marginBottom: '10px' }} />
+                        <input type="file" name="document" style={{ marginBottom: '10px' }} />
+                        <input type="hidden" name="old_document_url" value={editingNews.document_url} />
+                        <div style={{ display: 'flex', gap: '10px' }}>
+                            <button type="submit" style={{ backgroundColor: '#28a745', color: 'white', border: 'none', padding: '10px', flex: 1 }}>บันทึก</button>
+                            <button type="button" onClick={() => setEditingNews(null)} style={{ backgroundColor: '#6c757d', color: 'white', border: 'none', padding: '10px', flex: 1 }}>ยกเลิก</button>
+                        </div>
+                    </form>
+                </div>
+            )}
         </div>
     );
 }
