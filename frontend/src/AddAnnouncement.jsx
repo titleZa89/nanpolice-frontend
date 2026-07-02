@@ -145,9 +145,13 @@ function AddAnnouncement() {
                 </form>
             </div>
 
-            
+            {/* ---------------- การ์ดตารางแสดงรายการข่าว ---------------- */}
             <div style={{ backgroundColor: '#fff', borderRadius: '10px', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', overflow: 'hidden', border: '1px solid #e1e5eb' }}>
-                
+                <div style={{ padding: '20px 25px', borderBottom: '1px solid #eee', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#fdfdfd' }}>
+                    <h3 style={{ margin: 0, color: '#1C3D5A', fontSize: '18px', fontWeight: '500' }}>
+                        📋 รายการประกาศทั้งหมด ({newsList.length} รายการ)
+                    </h3>
+                </div>
                 
                 <div style={{ overflowX: 'auto' }}>
                     <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
