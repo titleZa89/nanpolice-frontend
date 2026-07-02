@@ -222,8 +222,8 @@ function HomePage() {
             )}
           </div>
 
-          {/* 🌟 Facebook Plugin ย้ายมาไว้ใต้ข่าวประกาศตรงนี้ 🌟 */}
-          <div style={{ borderTop: '2px dashed #eee', padding: '30px 20px', backgroundColor: '#fdfbf7' }}>
+          {/* 🌟 Facebook Plugin (สายเถื่อน บังคับซูมเต็มพื้นที่) 🌟 */}
+          <div style={{ borderTop: '2px dashed #eee', padding: '30px 20px', overflow: 'hidden' }}>
             <div style={{ 
               backgroundColor: 'white', 
               borderRadius: '8px', 
@@ -231,18 +231,31 @@ function HomePage() {
               overflow: 'hidden', 
               border: '1px solid #ddd',
               width: '100%',
-              maxWidth: '500px', // ขนาดกว้างสุดที่เหมาะสมสำหรับ FB Plugin
-              margin: '0 auto'   // สั่งให้อยู่ตรงกลางของ Main
+              // ไม่มี maxWidth แล้ว ปล่อยยืดเต็มที่
             }}>
               <div style={{ backgroundColor: '#1C3D5A', color: 'white', padding: '12px 0', textAlign: 'center' }}>
                 <h3 style={{ margin: 0, fontSize: '16px' }}>Facebook ภ.จว.น่าน</h3>
               </div>
-              <div style={{ padding: '10px', display: 'flex', justifyContent: 'center', width: '100%', boxSizing: 'border-box' }}>
-                <iframe 
-                  src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&tabs=timeline&width=500&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=" 
-                  style={{ border: 'none', overflow: 'hidden', width: '100%', height: '600px' }} 
-                  allow="encrypted-media"
-                ></iframe>
+              
+              {/* จุดเวทมนตร์: ถ่างเฟสบุ๊คให้เต็มจอ */}
+              <div style={{ 
+                width: '100%', 
+                display: 'flex', 
+                justifyContent: 'center',
+                overflow: 'hidden',
+                height: '600px'
+              }}>
+                <div style={{
+                  width: '500px', // ให้เฟสบุ๊คคิดว่าอยู่กล่อง 500px
+                  transform: 'scale(1.5)', // บังคับซูมขยาย 1.5 เท่า (ปรับเลขได้)
+                  transformOrigin: 'top center',
+                }}>
+                  <iframe 
+                    src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&tabs=timeline&width=500&height=600&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=true&appId=" 
+                    style={{ border: 'none', overflow: 'hidden', width: '500px', height: '600px' }} 
+                    allow="encrypted-media"
+                  ></iframe>
+                </div>
               </div>
             </div>
           </div>
