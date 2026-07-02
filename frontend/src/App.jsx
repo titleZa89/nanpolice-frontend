@@ -193,15 +193,20 @@ function HomePage() {
             <div style={{ backgroundColor: '#1C3D5A', color: 'white', padding: '12px 0', borderBottom: '3px solid #1877F2', textAlign: 'center' }}>
               <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '500' }}>Facebook ภ.จว.น่าน</h3>
             </div>
-            <div style={{ padding: '10px', display: 'flex', justifyContent: 'center', width: '100%' }}>
-  <iframe 
-    src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&tabs=timeline&width=500&height=1500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
-    width="500" 
-    height="1500" 
-    style={{ border: 'none', overflow: 'hidden', width: '100%', maxWidth: '500px' }} 
-    allow="encrypted-media"
-  ></iframe>
-</div>
+        <div style={{ padding: '10px', display: 'flex', justifyContent: 'center', width: '100%', boxSizing: 'border-box' }}>
+          <iframe 
+           /* ✨ ลบ width=320 ออก แล้วเปลี่ยนเป็น width=500 หรือปล่อยให้ Facebook จัดการ */
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&tabs=timeline&width=500&height=1500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
+            style={{ 
+           border: 'none', 
+            overflow: 'hidden', 
+            width: '100%',     /* ยืดตาม div แม่ */
+             maxWidth: '500px', /* จำกัดไม่ให้กว้างเกินไปจนดูแปลก */
+            height: '1500px' 
+            }} 
+            allow="encrypted-media"
+          ></iframe>
+        </div>
           </div>
         </aside>
 
