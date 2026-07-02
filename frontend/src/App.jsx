@@ -19,7 +19,7 @@ function MainLayout({ children }) {
     whiteSpace: 'nowrap'
   });
 
-  // 🌟 รายชื่อสถานีตำรวจ และ ลิงก์เว็บของแต่ละสถานี (นำลิงก์จริงมาใส่แทน "#" ได้เลย)
+  // 🌟 รายชื่อสถานีตำรวจ
   const policeStations = [
     { name: "เมืองน่าน", url: "https://mueangnan.nan.police.go.th/" },
     { name: "เวียงสา", url: "https://wiangsa.nan.police.go.th/p1-home/page1.htm" },
@@ -80,7 +80,6 @@ function MainLayout({ children }) {
       {/* Header */}
       <header style={{ backgroundColor: '#1a1a1a', padding: '12px 30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.2)', position: 'sticky', top: 0, zIndex: 100, borderBottom: '3px solid #333' }}>
         
-        {/* โลโก้และชื่อ */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '15px', flexShrink: 0 }}>
           <img src="/logo.png" alt="โลโก้" style={{ width: '50px', height: '50px', objectFit: 'contain' }} />
           <div>
@@ -89,13 +88,11 @@ function MainLayout({ children }) {
           </div>
         </div>
 
-        {/* แถบเมนู Navigation */}
         <nav style={{ display: 'flex', gap: '15px', alignItems: 'center', fontSize: '15px', fontWeight: '400' }}>
           <Link to="/" className="nav-link" style={menuStyle('/')}>หน้าแรก</Link>
           <Link to="/about" className="nav-link" style={menuStyle('/about')}>เกี่ยวกับเรา</Link>
           <Link to="/commander" className="nav-link" style={menuStyle('/commander')}>ผู้บังคับบัญชา</Link>
           
-          {/* Dropdown สถานีตำรวจ (ลิงก์เปิดหน้าใหม่) */}
           <div className="dropdown" style={{ cursor: 'pointer', paddingBottom: '3px' }}>
             <span className="nav-link" style={{ color: '#ffffff', transition: 'all 0.3s', whiteSpace: 'nowrap' }}>สถานีตำรวจในสังกัด ▾</span>
             <div className="dropdown-content">
@@ -119,12 +116,10 @@ function MainLayout({ children }) {
         </nav>
       </header>
 
-      {/* พื้นที่แสดงเนื้อหาของแต่ละหน้า */}
       <div style={{ flex: 1 }}>
         {children}
       </div>
 
-      {/* Footer */}
       <footer style={{ backgroundColor: '#1a1a1a', color: '#bbb', textAlign: 'center', padding: '40px 20px', borderTop: '5px solid #8B0000', marginTop: 'auto' }}>
         <img src="/logo.png" alt="โลโก้" style={{ width: '50px', height: '50px', opacity: '0.5', marginBottom: '15px', filter: 'grayscale(100%)' }} />
         <p style={{ margin: '0 0 10px 0', fontSize: '16px', color: '#fff' }}>ตำรวจภูธรจังหวัดน่าน</p>
@@ -178,7 +173,6 @@ function HomePage() {
       <div style={{ maxWidth: '1200px', margin: '0 auto 50px auto', padding: '0 20px', display: 'flex', gap: '30px', alignItems: 'flex-start' }}>
         <aside style={{ width: '320px', display: 'flex', flexDirection: 'column', gap: '25px' }}>
           
-          {/* ข้อมูลผู้บังคับบัญชา */}
           <div style={{ backgroundColor: 'white', padding: '0 0 25px 0', borderRadius: '8px', boxShadow: '0 4px 15px rgba(0,0,0,0.08)', textAlign: 'center', overflow: 'hidden', border: '1px solid #ddd' }}>
             <div style={{ backgroundColor: '#8B0000', color: 'white', padding: '15px 0', borderBottom: '3px solid #D4AF37' }}>
               <h3 style={{ margin: 0, fontSize: '18px', fontWeight: '500' }}>ผู้บังคับบัญชา</h3>
@@ -222,8 +216,8 @@ function HomePage() {
             )}
           </div>
 
-          {/* 🌟 Facebook Plugin (สายเถื่อน บังคับซูมเต็มพื้นที่) 🌟 */}
-          <div style={{ borderTop: '2px dashed #eee', padding: '30px 20px', overflow: 'hidden' }}>
+          {/* 🌟 Facebook Plugin: จัดเต็ม ไม่แหว่ง ไม่ขาดซ้ายขวา 🌟 */}
+          <div style={{ borderTop: '2px dashed #eee', padding: '30px 20px', backgroundColor: '#fdfbf7', display: 'flex', justifyContent: 'center' }}>
             <div style={{ 
               backgroundColor: 'white', 
               borderRadius: '8px', 
@@ -231,31 +225,23 @@ function HomePage() {
               overflow: 'hidden', 
               border: '1px solid #ddd',
               width: '100%',
-              // ไม่มี maxWidth แล้ว ปล่อยยืดเต็มที่
+              maxWidth: '500px' // ล็อคไว้ไม่ให้กว้างเกินขีดจำกัดของเฟสบุ๊ค
             }}>
               <div style={{ backgroundColor: '#1C3D5A', color: 'white', padding: '12px 0', textAlign: 'center' }}>
                 <h3 style={{ margin: 0, fontSize: '16px' }}>Facebook ภ.จว.น่าน</h3>
               </div>
               
-              {/* จุดเวทมนตร์: ถ่างเฟสบุ๊คให้เต็มจอ */}
-              <div style={{ 
-                width: '100%', 
-                display: 'flex', 
-                justifyContent: 'center',
-                overflow: 'hidden',
-                height: '600px'
-              }}>
-                <div style={{
-                  width: '500px', // ให้เฟสบุ๊คคิดว่าอยู่กล่อง 500px
-                  transform: 'scale(1.5)', // บังคับซูมขยาย 1.5 เท่า (ปรับเลขได้)
-                  transformOrigin: 'top center',
-                }}>
-                  <iframe 
-                    src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&tabs=timeline&width=500&height=600&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=true&appId=" 
-                    style={{ border: 'none', overflow: 'hidden', width: '500px', height: '600px' }} 
-                    allow="encrypted-media"
-                  ></iframe>
-                </div>
+              <div style={{ display: 'flex', justifyContent: 'center', width: '100%', backgroundColor: 'white' }}>
+                <iframe 
+                  /* แก้ปัญหาตรงนี้: ใส่ width=500 ทั้งในลิงก์และใน iframe เพื่อบังคับให้เฟสบุ๊คเรนเดอร์ข้อความให้พอดี 500px */
+                  src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&tabs=timeline&width=500&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=" 
+                  width="500" 
+                  height="600" 
+                  style={{ border: 'none', overflow: 'hidden', maxWidth: '100%' }} 
+                  scrolling="no" 
+                  frameBorder="0" 
+                  allow="encrypted-media"
+                ></iframe>
               </div>
             </div>
           </div>
@@ -271,7 +257,6 @@ function AboutPage() {
   return (
     <div style={{ maxWidth: '1000px', margin: '40px auto', padding: '0 20px', minHeight: '60vh', fontFamily: '"Sarabun", "Kanit", sans-serif' }}>
 
-      {/* ส่วนหัวของหน้า (จัดโลโก้และข้อความให้อยู่กึ่งกลาง) */}
       <div style={{ textAlign: 'center', marginBottom: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <img src="/logo.png" alt="ตราแผ่นดิน/โลโก้" style={{ width: '85px', marginBottom: '15px' }} />
         <h2 style={{ color: '#1C3D5A', fontSize: '28px', borderBottom: '3px solid #D4AF37', display: 'inline-block', paddingBottom: '10px', marginTop: 0 }}>
@@ -282,10 +267,8 @@ function AboutPage() {
         </h3>
       </div>
 
-      {/* วิสัยทัศน์ & พันธกิจ & ค่านิยม - กรอบหลักทางการ */}
       <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '8px', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', marginBottom: '30px', borderTop: '5px solid #1C3D5A' }}>
         
-        {/* วิสัยทัศน์ */}
         <div style={{ textAlign: 'center', marginBottom: '35px' }}>
           <h3 style={{ color: '#D4AF37', margin: '0 0 10px 0', fontSize: '20px', backgroundColor: '#1C3D5A', display: 'inline-block', padding: '8px 30px', borderRadius: '25px' }}>
             วิสัยทัศน์ (Vision)
@@ -298,7 +281,6 @@ function AboutPage() {
         <hr style={{ border: '0', borderTop: '1px dashed #ccc', margin: '30px 0' }} />
 
         <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap' }}>
-          {/* พันธกิจ (นำไอคอนออก) */}
           <div style={{ flex: '1', minWidth: '300px' }}>
             <h3 style={{ color: '#8B0000', margin: '0 0 15px 0', fontSize: '18px', fontWeight: 'bold' }}>
               พันธกิจ (Mission)
@@ -311,7 +293,6 @@ function AboutPage() {
             </ol>
           </div>
           
-          {/* ค่านิยมหลัก (นำไอคอนออก) */}
           <div style={{ flex: '1', minWidth: '300px' }}>
             <h3 style={{ color: '#1C3D5A', margin: '0 0 15px 0', fontSize: '18px', fontWeight: 'bold' }}>
               ค่านิยมหลัก (Core Values)
@@ -327,7 +308,6 @@ function AboutPage() {
         </div>
       </div>
 
-      {/* ประวัติความเป็นมา */}
       <div style={{ backgroundColor: '#fdfbf7', padding: '40px', borderRadius: '8px', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', marginBottom: '30px', border: '1px solid #e8e0c5' }}>
         <h3 style={{ color: '#8B0000', borderLeft: '5px solid #D4AF37', paddingLeft: '15px', marginTop: '0', fontSize: '20px' }}>ประวัติความเป็นมา</h3>
         <p style={{ color: '#444', lineHeight: '1.8', fontSize: '16px', textIndent: '40px', marginBottom: '15px', textAlign: 'justify' }}>
@@ -338,7 +318,6 @@ function AboutPage() {
         </p>
       </div>
 
-      {/* อุดมคติตำรวจ */}
       <div style={{ backgroundColor: '#8B0000', color: 'white', padding: '40px', borderRadius: '8px', textAlign: 'center', boxShadow: '0 6px 20px rgba(139,0,0,0.2)' }}>
         <h3 style={{ color: '#D4AF37', margin: '0 0 25px 0', fontSize: '24px', fontWeight: 'bold' }}>อุดมคติตำรวจ</h3>
         <div style={{ fontSize: '18px', lineHeight: '2.2', margin: '0', fontWeight: '400', letterSpacing: '0.5px' }}>
@@ -383,7 +362,6 @@ function MuseumPage() {
       </h2>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '30px' }}>
-        {/* เมนูเลือก PDF */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
           {museumFiles.map((item) => (
             <button 
@@ -395,12 +373,11 @@ function MuseumPage() {
                 color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '14px' 
               }}
             >
-              {item.title.split('.')[0]} {/* แสดงเลขหัวข้อ */}
+              {item.title.split('.')[0]}
             </button>
           ))}
         </div>
 
-        {/* ส่วนแสดง PDF Viewer */}
         <div style={{ backgroundColor: '#333', padding: '10px', borderRadius: '8px', minHeight: '700px' }}>
           <h4 style={{ color: 'white', margin: '0 0 10px 10px' }}>กำลังแสดง: {activeTitle}</h4>
           <iframe 
@@ -415,21 +392,17 @@ function MuseumPage() {
   );
 }
 
-
-
 // --- หน้าผู้บังคับบัญชา (Commander) ---
 function CommanderPage() {
   return (
     <div style={{ maxWidth: '1000px', margin: '40px auto', padding: '40px', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', minHeight: '50vh', fontFamily: '"Sarabun", "Kanit", sans-serif' }}>
       
-      {/* หัวข้อหน้า */}
       <div style={{ textAlign: 'center', marginBottom: '30px' }}>
         <h2 style={{ color: '#1C3D5A', fontSize: '28px', borderBottom: '3px solid #D4AF37', display: 'inline-block', paddingBottom: '10px', marginTop: 0 }}>
           ทำเนียบผู้บังคับบัญชา
         </h2>
       </div>
 
-      {/* รูปภาพโครงสร้างผู้บังคับบัญชา */}
       <div style={{ textAlign: 'center' }}>
         <img 
           src="/structure.png" 
@@ -473,7 +446,6 @@ function DownloadPage() {
   return (
     <div style={{ maxWidth: '1200px', margin: '40px auto', padding: '0 20px', minHeight: '60vh', fontFamily: '"Sarabun", "Kanit", sans-serif' }}>
       
-      {/* ส่วนหัว */}
       <div style={{ textAlign: 'center', marginBottom: '40px' }}>
         <h2 style={{ color: '#1C3D5A', fontSize: '28px', borderBottom: '3px solid #D4AF37', display: 'inline-block', paddingBottom: '10px', marginTop: 0 }}>
           ศูนย์บริการดาวน์โหลด
@@ -485,7 +457,6 @@ function DownloadPage() {
 
       <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }}>
         
-        {/* หมวดงานสอบสวน */}
         <div style={{ ...downloadCardStyle, borderTopColor: '#8B0000' }}>
           <h3 style={{ color: '#8B0000', marginTop: 0, paddingBottom: '15px', borderBottom: '2px solid #eee', fontSize: '20px', fontWeight: '500' }}>
             งานสอบสวนและแจ้งความ
@@ -503,7 +474,6 @@ function DownloadPage() {
           </div>
         </div>
 
-        {/* หมวดงานจราจร */}
         <div style={{ ...downloadCardStyle, borderTopColor: '#1C3D5A' }}>
           <h3 style={{ color: '#1C3D5A', marginTop: 0, paddingBottom: '15px', borderBottom: '2px solid #eee', fontSize: '20px', fontWeight: '500' }}>
             งานจราจร
@@ -521,7 +491,6 @@ function DownloadPage() {
           </div>
         </div>
 
-        {/* หมวดข้อมูลสาธารณะ */}
         <div style={{ ...downloadCardStyle, borderTopColor: '#D4AF37' }}>
           <h3 style={{ color: '#b58e00', marginTop: 0, paddingBottom: '15px', borderBottom: '2px solid #eee', fontSize: '20px', fontWeight: '500' }}>
             ข้อมูลสาธารณะ (ITA)
@@ -549,7 +518,6 @@ function ContactPage() {
   return (
     <div style={{ maxWidth: '1200px', margin: '40px auto', padding: '0 20px', minHeight: '60vh', fontFamily: '"Sarabun", "Kanit", sans-serif' }}>
       
-      {/* ส่วนหัว */}
       <div style={{ textAlign: 'center', marginBottom: '40px' }}>
         <h2 style={{ color: '#1C3D5A', fontSize: '28px', borderBottom: '3px solid #D4AF37', display: 'inline-block', paddingBottom: '10px', marginTop: 0 }}>
           ติดต่อ-สอบถาม
@@ -561,7 +529,6 @@ function ContactPage() {
 
       <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }}>
         
-        {/* ข้อมูลการติดต่อ */}
         <div style={{ flex: '1', minWidth: '350px', backgroundColor: 'white', padding: '40px 35px', borderRadius: '8px', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', borderTop: '5px solid #1C3D5A' }}>
           <h3 style={{ color: '#8B0000', borderBottom: '2px solid #eee', paddingBottom: '15px', marginTop: 0, fontSize: '20px', fontWeight: '500' }}>
             รายละเอียดการติดต่อ
@@ -596,7 +563,6 @@ function ContactPage() {
           </div>
         </div>
 
-        {/* แผนที่ (ดึงจาก Google Maps อัตโนมัติ) */}
         <div style={{ flex: '1.5', minWidth: '350px', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', border: '1px solid #ddd' }}>
           <iframe 
             src="https://maps.google.com/maps?q=ตำรวจภูธรจังหวัดน่าน&t=&z=16&ie=UTF8&iwloc=&output=embed" 
@@ -614,7 +580,6 @@ function ContactPage() {
   );
 }
 
-
 // ==========================================
 // 3. ส่วนตัวจัดการเส้นทาง (Router & App)
 // ==========================================
@@ -625,7 +590,6 @@ function App() {
     <Router>
       <Routes>
         
-        {/* --- กลุ่มหน้าเว็บสำหรับประชาชน (ครอบด้วย MainLayout) --- */}
         <Route path="/" element={<MainLayout><HomePage /></MainLayout>} />
         <Route path="/about" element={<MainLayout><AboutPage /></MainLayout>} />
         <Route path="/commander" element={<MainLayout><CommanderPage /></MainLayout>} />
@@ -633,7 +597,6 @@ function App() {
         <Route path="/download" element={<MainLayout><DownloadPage /></MainLayout>} />
         <Route path="/contact" element={<MainLayout><ContactPage /></MainLayout>} />
 
-        {/* --- กลุ่มระบบหลังบ้าน (แยกอิสระ) --- */}
         <Route path="/admin" element={isAdmin ? <AdminDashboard setIsAdmin={setIsAdmin} /> : <Navigate to="/admin/login" />} />
         <Route path="/admin/login" element={isAdmin ? <Navigate to="/admin" /> : <AdminLogin setIsAdmin={setIsAdmin} />} />
         
