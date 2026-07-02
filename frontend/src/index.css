@@ -29,12 +29,7 @@
     font-size: 16px;
   }
 }
-html, body {
-  overflow-x: hidden; /* ป้องกันการเลื่อนซ้าย-ขวาได้ถ้าหน้าเว็บเกิน */
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
+
 
 @media (prefers-color-scheme: dark) {
   :root {
