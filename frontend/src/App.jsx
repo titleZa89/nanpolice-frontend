@@ -177,6 +177,8 @@ function HomePage() {
 
       <div style={{ maxWidth: '1200px', margin: '0 auto 50px auto', padding: '0 20px', display: 'flex', gap: '30px', alignItems: 'flex-start' }}>
         <aside style={{ width: '320px', display: 'flex', flexDirection: 'column', gap: '25px' }}>
+          
+          {/* ข้อมูลผู้บังคับบัญชา */}
           <div style={{ backgroundColor: 'white', padding: '0 0 25px 0', borderRadius: '8px', boxShadow: '0 4px 15px rgba(0,0,0,0.08)', textAlign: 'center', overflow: 'hidden', border: '1px solid #ddd' }}>
             <div style={{ backgroundColor: '#8B0000', color: 'white', padding: '15px 0', borderBottom: '3px solid #D4AF37' }}>
               <h3 style={{ margin: 0, fontSize: '18px', fontWeight: '500' }}>ผู้บังคับบัญชา</h3>
@@ -189,54 +191,12 @@ function HomePage() {
               <p style={{ fontSize: '14px', color: '#666', margin: 0 }}>ผู้บังคับการตำรวจภูธรจังหวัดน่าน</p>
             </div>
           </div>
-          <div style={{ 
-  backgroundColor: 'white', 
-  borderRadius: '8px', 
-  boxShadow: '0 4px 15px rgba(0,0,0,0.08)', 
-  overflow: 'hidden', 
-  border: '1px solid #ddd',
-  width: '100%' // ให้มันยืดเต็มกล่องที่คุณวางไว้
-}}>
- 
-
-  <div style={{ 
-  backgroundColor: 'white', 
-  borderRadius: '8px', 
-  boxShadow: '0 4px 15px rgba(0,0,0,0.08)', 
-  overflow: 'hidden', 
-  border: '1px solid #ddd',
-  width: '100%',
-  maxWidth: '500px', // Facebook Plugin ทำงานได้ดีที่สุดที่ความกว้างนี้
-  margin: '0 auto'   // นี่คือคำสั่งที่ทำให้ "อยู่ตรงกลางจอ"
-}}>
-  <div style={{ backgroundColor: '#1C3D5A', color: 'white', padding: '12px 0', textAlign: 'center' }}>
-    <h3 style={{ margin: 0, fontSize: '16px' }}>Facebook ภ.จว.น่าน</h3>
-  </div>
-
-  <div style={{ 
-    padding: '10px', 
-    display: 'flex', 
-    justifyContent: 'center', 
-    width: '100%',
-    boxSizing: 'border-box'
-  }}>
-    <iframe 
-      // เพิ่ม &adapt_container_width=true ใน URL เพื่อให้ FB ขยายตามกล่อง
-      src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&tabs=timeline&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=" 
-      style={{ 
-        border: 'none', 
-        overflow: 'hidden', 
-        width: '100%', 
-        height: '600px'
-      }} 
-      allow="encrypted-media"
-    ></iframe>
-  </div>
-</div>
-</div>
+          
         </aside>
 
         <main style={{ flex: 1, backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 4px 15px rgba(0,0,0,0.08)', overflow: 'hidden', border: '1px solid #ddd' }}>
+          
+          {/* ข่าวประกาศ */}
           <div style={{ backgroundColor: '#1C3D5A', color: 'white', padding: '18px 25px', display: 'flex', alignItems: 'center', gap: '10px', borderBottom: '3px solid #D4AF37' }}>
             <span style={{ fontSize: '22px' }}>📢</span>
             <h2 style={{ margin: 0, fontSize: '20px', fontWeight: '500' }}>ข่าวประกวดราคา / ประกาศตำรวจ</h2>
@@ -261,6 +221,32 @@ function HomePage() {
               <p style={{ textAlign: 'center', color: '#999', padding: '30px' }}>ยังไม่มีประกาศในขณะนี้</p>
             )}
           </div>
+
+          {/* 🌟 Facebook Plugin ย้ายมาไว้ใต้ข่าวประกาศตรงนี้ 🌟 */}
+          <div style={{ borderTop: '2px dashed #eee', padding: '30px 20px', backgroundColor: '#fdfbf7' }}>
+            <div style={{ 
+              backgroundColor: 'white', 
+              borderRadius: '8px', 
+              boxShadow: '0 4px 15px rgba(0,0,0,0.08)', 
+              overflow: 'hidden', 
+              border: '1px solid #ddd',
+              width: '100%',
+              maxWidth: '500px', // ขนาดกว้างสุดที่เหมาะสมสำหรับ FB Plugin
+              margin: '0 auto'   // สั่งให้อยู่ตรงกลางของ Main
+            }}>
+              <div style={{ backgroundColor: '#1C3D5A', color: 'white', padding: '12px 0', textAlign: 'center' }}>
+                <h3 style={{ margin: 0, fontSize: '16px' }}>Facebook ภ.จว.น่าน</h3>
+              </div>
+              <div style={{ padding: '10px', display: 'flex', justifyContent: 'center', width: '100%', boxSizing: 'border-box' }}>
+                <iframe 
+                  src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&tabs=timeline&width=500&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=" 
+                  style={{ border: 'none', overflow: 'hidden', width: '100%', height: '600px' }} 
+                  allow="encrypted-media"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+
         </main>
       </div>
     </>
