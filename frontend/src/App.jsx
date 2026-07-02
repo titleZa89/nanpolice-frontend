@@ -195,39 +195,29 @@ function HomePage() {
   boxShadow: '0 4px 15px rgba(0,0,0,0.08)', 
   overflow: 'hidden', 
   border: '1px solid #ddd',
-  width: '100%',
-  maxWidth: '500px', // กำหนดความกว้างสูงสุดของกล่อง
-  margin: '0 auto'   // ดันกล่องให้อยู่ตรงกลางหน้าเว็บเสมอ
+  width: '100%' // ให้มันยืดเต็มกล่องที่คุณวางไว้
 }}>
-  <div style={{ backgroundColor: '#1C3D5A', color: 'white', padding: '12px 0', borderBottom: '3px solid #1877F2', textAlign: 'center' }}>
-    <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '500' }}>Facebook ภ.จว.น่าน</h3>
+  <div style={{ backgroundColor: '#1C3D5A', color: 'white', padding: '12px 0', textAlign: 'center' }}>
+    <h3 style={{ margin: 0, fontSize: '16px' }}>Facebook ภ.จว.น่าน</h3>
   </div>
 
   <div style={{ 
     padding: '10px', 
     display: 'flex', 
     justifyContent: 'center', 
-    width: '100%', 
-    boxSizing: 'border-box',
-    overflow: 'hidden' 
+    width: '100%' 
   }}>
-    <div style={{ 
-      width: '500px', 
-      transform: window.innerWidth < 500 ? `scale(${window.innerWidth / 500})` : 'none', 
-      transformOrigin: 'top center',
-      height: '1500px' 
-    }}>
-      <iframe 
-        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&tabs=timeline&width=500&height=1500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
-        style={{ 
-          border: 'none', 
-          overflow: 'hidden', 
-          width: '500px', 
-          height: '1500px' 
-        }} 
-        allow="encrypted-media"
-      ></iframe>
-    </div>
+    <iframe 
+      // เปลี่ยนตรงนี้เป็น data-adapt-container-width="true" 
+      // และเอาค่า width=500 ออกจาก URL เพื่อให้ FB ปรับขนาดเอง
+      src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&tabs=timeline&height=1500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" 
+      style={{ 
+        border: 'none', 
+        width: '100%', 
+        height: '600px' // ปรับความสูงให้พอดี ไม่ต้องยาวเกินไปจนดูแปลก
+      }} 
+      allow="encrypted-media"
+    ></iframe>
   </div>
 </div>
         </aside>
