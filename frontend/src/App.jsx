@@ -193,9 +193,15 @@ function HomePage() {
             <div style={{ backgroundColor: '#1C3D5A', color: 'white', padding: '12px 0', borderBottom: '3px solid #1877F2', textAlign: 'center' }}>
               <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '500' }}>Facebook ภ.จว.น่าน</h3>
             </div>
-            <div style={{ padding: '10px', display: 'flex', justifyContent: 'center' }}>
-              <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&width=300&height=400" width="300" height="400" style={{ border: 'none', overflow: 'hidden' }}></iframe>
-            </div>
+            <div style={{ padding: '10px', display: 'flex', justifyContent: 'center', width: '100%' }}>
+  <iframe 
+    src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&tabs=timeline&width=500&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
+    width="500" 
+    height="700" 
+    style={{ border: 'none', overflow: 'hidden', width: '100%', maxWidth: '500px' }} 
+    allow="encrypted-media"
+  ></iframe>
+</div>
           </div>
         </aside>
 
