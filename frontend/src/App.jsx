@@ -210,7 +210,7 @@ function HomePage() {
     <iframe 
       // เปลี่ยนตรงนี้เป็น data-adapt-container-width="true" 
       // และเอาค่า width=500 ออกจาก URL เพื่อให้ FB ปรับขนาดเอง
-      src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&tabs=timeline&height=1500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" 
+      src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&tabs=timeline&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=" 
       style={{ 
         border: 'none', 
         width: '100%', 
