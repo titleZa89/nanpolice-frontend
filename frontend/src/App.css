@@ -16,7 +16,23 @@
     outline-offset: 2px;
   }
 }
+/* จัดการไม่ให้หน้าเว็บล้นจอ */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
 
+/* บังคับให้ Facebook Plugin ปรับตัวตามหน้าจอ */
+.fb-page, .fb-page span, .fb-page span iframe {
+  width: 100% !important;
+}
+
+/* ถ้าใช้ iframe แบบที่แปะไว้ก่อนหน้านี้ ให้ใช้ตัวนี้ครับ */
+iframe {
+  max-width: 100% !important;
+}
 .hero {
   position: relative;
 
