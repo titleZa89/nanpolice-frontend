@@ -19,7 +19,7 @@ function MainLayout({ children }) {
     whiteSpace: 'nowrap'
   });
 
-  // 🌟 รายชื่อสถานีตำรวจ และ ลิงก์เว็บของแต่ละสถานี
+  // 🌟 รายชื่อสถานีตำรวจ และ ลิงก์เว็บของแต่ละสถานี (นำลิงก์จริงมาใส่แทน "#" ได้เลย)
   const policeStations = [
     { name: "เมืองน่าน", url: "https://mueangnan.nan.police.go.th/" },
     { name: "เวียงสา", url: "https://wiangsa.nan.police.go.th/p1-home/page1.htm" },
@@ -77,8 +77,8 @@ function MainLayout({ children }) {
       {/* Top Bar */}
       <div style={{ backgroundColor: '#1C3D5A', height: '6px', width: '100%' }}></div>
 
-      {/* Header - เพิ่ม flexWrap ให้เมนูยืดหยุ่นในมือถือ */}
-      <header style={{ backgroundColor: '#1a1a1a', padding: '12px 30px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.2)', position: 'sticky', top: 0, zIndex: 100, borderBottom: '3px solid #333', gap: '15px' }}>
+      {/* Header */}
+      <header style={{ backgroundColor: '#1a1a1a', padding: '12px 30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.2)', position: 'sticky', top: 0, zIndex: 100, borderBottom: '3px solid #333' }}>
         
         {/* โลโก้และชื่อ */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '15px', flexShrink: 0 }}>
@@ -89,13 +89,13 @@ function MainLayout({ children }) {
           </div>
         </div>
 
-        {/* แถบเมนู Navigation - เพิ่ม flexWrap */}
-        <nav style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', alignItems: 'center', fontSize: '15px', fontWeight: '400' }}>
+        {/* แถบเมนู Navigation */}
+        <nav style={{ display: 'flex', gap: '15px', alignItems: 'center', fontSize: '15px', fontWeight: '400' }}>
           <Link to="/" className="nav-link" style={menuStyle('/')}>หน้าแรก</Link>
           <Link to="/about" className="nav-link" style={menuStyle('/about')}>เกี่ยวกับเรา</Link>
           <Link to="/commander" className="nav-link" style={menuStyle('/commander')}>ผู้บังคับบัญชา</Link>
           
-          {/* Dropdown สถานีตำรวจ */}
+          {/* Dropdown สถานีตำรวจ (ลิงก์เปิดหน้าใหม่) */}
           <div className="dropdown" style={{ cursor: 'pointer', paddingBottom: '3px' }}>
             <span className="nav-link" style={{ color: '#ffffff', transition: 'all 0.3s', whiteSpace: 'nowrap' }}>สถานีตำรวจในสังกัด ▾</span>
             <div className="dropdown-content">
@@ -120,7 +120,7 @@ function MainLayout({ children }) {
       </header>
 
       {/* พื้นที่แสดงเนื้อหาของแต่ละหน้า */}
-      <div style={{ flex: 1, width: '100%', overflowX: 'hidden' }}>
+      <div style={{ flex: 1 }}>
         {children}
       </div>
 
@@ -175,11 +175,8 @@ function HomePage() {
         <button onClick={nextBanner} style={{ position: 'absolute', top: '50%', right: '20px', transform: 'translateY(-50%)', backgroundColor: 'rgba(0,0,0,0.6)', color: 'white', border: 'none', padding: '10px 15px', borderRadius: '50%', cursor: 'pointer', zIndex: 10 }}>❯</button>
       </div>
 
-      {/* ✨ จุดสำคัญที่แก้: เพิ่ม flexWrap: 'wrap' เพื่อให้มือถือเรียงกล่องลงมาด้านล่างได้ ไม่เบียดกัน */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto 50px auto', padding: '0 20px', display: 'flex', gap: '30px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
-        
-        {/* ✨ จุดสำคัญที่แก้: เปลี่ยน width ตายตัว เป็น flex-basis ให้ยืดหยุ่น */}
-        <aside style={{ flex: '1 1 320px', minWidth: '300px', display: 'flex', flexDirection: 'column', gap: '25px' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto 50px auto', padding: '0 20px', display: 'flex', gap: '30px', alignItems: 'flex-start' }}>
+        <aside style={{ width: '320px', display: 'flex', flexDirection: 'column', gap: '25px' }}>
           <div style={{ backgroundColor: 'white', padding: '0 0 25px 0', borderRadius: '8px', boxShadow: '0 4px 15px rgba(0,0,0,0.08)', textAlign: 'center', overflow: 'hidden', border: '1px solid #ddd' }}>
             <div style={{ backgroundColor: '#8B0000', color: 'white', padding: '15px 0', borderBottom: '3px solid #D4AF37' }}>
               <h3 style={{ margin: 0, fontSize: '18px', fontWeight: '500' }}>ผู้บังคับบัญชา</h3>
@@ -192,42 +189,54 @@ function HomePage() {
               <p style={{ fontSize: '14px', color: '#666', margin: 0 }}>ผู้บังคับการตำรวจภูธรจังหวัดน่าน</p>
             </div>
           </div>
-          
-          <div style={{ backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 4px 15px rgba(0,0,0,0.08)', overflow: 'hidden', border: '1px solid #ddd' }}>
-            <div style={{ backgroundColor: '#1C3D5A', color: 'white', padding: '12px 0', borderBottom: '3px solid #1877F2', textAlign: 'center' }}>
-              <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '500' }}>Facebook ภ.จว.น่าน</h3>
-            </div>
-            
-            <div style={{ 
-  padding: '10px', 
-  display: 'flex', 
-  justifyContent: 'center', 
-  width: '100%', 
-  overflow: 'hidden' // ป้องกันไม่ให้ทะลุขอบ
+          <div style={{ 
+  backgroundColor: 'white', 
+  borderRadius: '8px', 
+  boxShadow: '0 4px 15px rgba(0,0,0,0.08)', 
+  overflow: 'hidden', 
+  border: '1px solid #ddd',
+  width: '100%' // ให้มันยืดเต็มกล่องที่คุณวางไว้
 }}>
+ 
+
   <div style={{ 
-    width: '100%', 
-    maxWidth: '500px', // ให้กว้างสุดแค่ 500px ในคอม
-    position: 'relative'
+  backgroundColor: 'white', 
+  borderRadius: '8px', 
+  boxShadow: '0 4px 15px rgba(0,0,0,0.08)', 
+  overflow: 'hidden', 
+  border: '1px solid #ddd',
+  width: '100%',
+  maxWidth: '500px', // Facebook Plugin ทำงานได้ดีที่สุดที่ความกว้างนี้
+  margin: '0 auto'   // นี่คือคำสั่งที่ทำให้ "อยู่ตรงกลางจอ"
+}}>
+  <div style={{ backgroundColor: '#1C3D5A', color: 'white', padding: '12px 0', textAlign: 'center' }}>
+    <h3 style={{ margin: 0, fontSize: '16px' }}>Facebook ภ.จว.น่าน</h3>
+  </div>
+
+  <div style={{ 
+    padding: '10px', 
+    display: 'flex', 
+    justifyContent: 'center', 
+    width: '100%',
+    boxSizing: 'border-box'
   }}>
     <iframe 
-      src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&tabs=timeline&width=500&height=1500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
+      // เพิ่ม &adapt_container_width=true ใน URL เพื่อให้ FB ขยายตามกล่อง
+      src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&tabs=timeline&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=" 
       style={{ 
         border: 'none', 
         overflow: 'hidden', 
         width: '100%', 
-        height: '1500px',
-        display: 'block'
+        height: '600px'
       }} 
       allow="encrypted-media"
     ></iframe>
   </div>
 </div>
-          </div>
+</div>
         </aside>
 
-        {/* ✨ จุดสำคัญที่แก้: เพิ่ม minWidth ให้กล่องข่าว */}
-        <main style={{ flex: '2 1 600px', minWidth: '300px', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 4px 15px rgba(0,0,0,0.08)', overflow: 'hidden', border: '1px solid #ddd' }}>
+        <main style={{ flex: 1, backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 4px 15px rgba(0,0,0,0.08)', overflow: 'hidden', border: '1px solid #ddd' }}>
           <div style={{ backgroundColor: '#1C3D5A', color: 'white', padding: '18px 25px', display: 'flex', alignItems: 'center', gap: '10px', borderBottom: '3px solid #D4AF37' }}>
             <span style={{ fontSize: '22px' }}>📢</span>
             <h2 style={{ margin: 0, fontSize: '20px', fontWeight: '500' }}>ข่าวประกวดราคา / ประกาศตำรวจ</h2>
@@ -244,7 +253,7 @@ function HomePage() {
                     </div>
                   </div>
                   {news.document_url && (
-                    <a href={`https://nanpolice-api.onrender.com/uploads/${news.document_url}`} target="_blank" rel="noreferrer" style={{ backgroundColor: '#8B0000', color: 'white', padding: '8px 16px', borderRadius: '4px', textDecoration: 'none', fontSize: '14px', whiteSpace: 'nowrap' }}>📄 ดาวน์โหลด</a>
+                    <a href={`https://nanpolice-api.onrender.com/uploads/${news.document_url}`} target="_blank" rel="noreferrer" style={{ backgroundColor: '#8B0000', color: 'white', padding: '8px 16px', borderRadius: '4px', textDecoration: 'none', fontSize: '14px' }}>📄 ดาวน์โหลด</a>
                   )}
                 </div>
               ))
@@ -350,8 +359,7 @@ function AboutPage() {
   );
 }
 
-import React, { useState } from 'react';
-
+// --- หน้าพิพิธภัณฑ์ตำรวจ (Museum) ---
 function MuseumPage() {
   const [currentPdf, setCurrentPdf] = useState("/files/project_1.pdf");
   const [activeTitle, setActiveTitle] = useState("1. โครงการปรับปรุงเพื่ออนุรักษ์หอประชุมตำรวจจังหวัดน่าน");
@@ -370,40 +378,14 @@ function MuseumPage() {
   };
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '40px auto', padding: '0 20px', fontFamily: '"Sarabun", sans-serif' }}>
-      {/* ส่วนหัวข้อเดิม */}
-      <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <h2 style={{ color: '#1C3D5A', fontSize: '28px', borderBottom: '3px solid #D4AF37', display: 'inline-block', paddingBottom: '10px' }}>
-          พิพิธภัณฑ์ตำรวจน่าน (Nan Police Museum)
-        </h2>
-        <p style={{ color: '#666', fontSize: '16px', marginTop: '15px' }}>แหล่งเรียนรู้ประวัติศาสตร์และเกียรติภูมิของตำรวจภูธรจังหวัดน่าน</p>
-      </div>
+    <div style={{ maxWidth: '1100px', margin: '40px auto', padding: '0 20px', fontFamily: '"Sarabun", sans-serif' }}>
+      <h2 style={{ color: '#1C3D5A', textAlign: 'center', borderBottom: '3px solid #D4AF37', paddingBottom: '10px' }}>
+        พิพิธภัณฑ์ตำรวจน่าน (Nan Police Museum)
+      </h2>
 
-      {/* ข้อมูลการเข้าชมและประวัติเดิม */}
-      <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '8px', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', marginBottom: '40px' }}>
-        <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }}>
-          <div style={{ flex: '2', minWidth: '300px' }}>
-            <h3 style={{ color: '#8B0000', borderLeft: '4px solid #D4AF37', paddingLeft: '10px' }}>ประวัติและนิทรรศการ</h3>
-            <p style={{ color: '#555', lineHeight: '1.8', textIndent: '30px' }}>พิพิธภัณฑ์ตำรวจน่าน จัดตั้งขึ้นเพื่อรวบรวมและจัดแสดงวัตถุโบราณ อาวุธปืนประจำกาย เครื่องแบบในแต่ละยุคสมัย และเอกสารสำคัญทางประวัติศาสตร์ที่เกี่ยวข้องกับการปฏิบัติงานของเจ้าหน้าที่ตำรวจภูธรจังหวัดน่านตั้งแต่อดีตจนถึงปัจจุบัน</p>
-          </div>
-          <div style={{ flex: '1', minWidth: '300px', backgroundColor: '#f9f9f9', padding: '25px', borderRadius: '8px', border: '1px solid #eee' }}>
-            <h3 style={{ color: '#1C3D5A', borderBottom: '2px dashed #ccc', paddingBottom: '10px' }}>📍 ข้อมูลการเข้าชม</h3>
-            <ul style={{ color: '#555', listStyle: 'none', padding: 0 }}>
-              <li><strong>📅 วันทำการ:</strong> จันทร์ - ศุกร์</li>
-              <li><strong>⏰ เวลา:</strong> 08.30 - 16.30 น.</li>
-              <li><strong>🎟️ อัตราค่าเข้าชม:</strong> ฟรี</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* ส่วนเลือกไฟล์ PDF */}
-      <div style={{ marginTop: '50px' }}>
-        <h3 style={{ color: '#1C3D5A', marginBottom: '20px', borderBottom: '2px solid #D4AF37', paddingBottom: '10px' }}>
-          📖 เอกสารประวัติศาสตร์และข้อมูลพิพิธภัณฑ์
-        </h3>
-        
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '20px', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '30px' }}>
+        {/* เมนูเลือก PDF */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
           {museumFiles.map((item) => (
             <button 
               key={item.id} 
@@ -411,29 +393,30 @@ function MuseumPage() {
               style={{ 
                 padding: '10px 15px', 
                 backgroundColor: currentPdf === item.file ? '#8B0000' : '#1C3D5A', 
-                color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' 
+                color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '14px' 
               }}
             >
-              {item.title.split('.')[0]}
+              {item.title.split('.')[0]} {/* แสดงเลขหัวข้อ */}
             </button>
           ))}
         </div>
 
         {/* ส่วนแสดง PDF Viewer */}
-        <div style={{ backgroundColor: '#333', padding: '10px', borderRadius: '8px', minHeight: '600px' }}>
-          <h4 style={{ color: 'white', margin: '10px' }}>{activeTitle}</h4>
+        <div style={{ backgroundColor: '#333', padding: '10px', borderRadius: '8px', minHeight: '700px' }}>
+          <h4 style={{ color: 'white', margin: '0 0 10px 10px' }}>กำลังแสดง: {activeTitle}</h4>
           <iframe 
             src={currentPdf} 
             width="100%" 
             height="700px" 
             style={{ borderRadius: '4px' }}
-            title="PDF Viewer"
           />
         </div>
       </div>
     </div>
   );
 }
+
+
 
 // --- หน้าผู้บังคับบัญชา (Commander) ---
 function CommanderPage() {
@@ -631,6 +614,7 @@ function ContactPage() {
     </div>
   );
 }
+
 
 // ==========================================
 // 3. ส่วนตัวจัดการเส้นทาง (Router & App)
