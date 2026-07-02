@@ -55,7 +55,11 @@ html, body {
     filter: invert(1) brightness(2);
   }
 }
-
+.fb-container {
+    width: 100%;
+    overflow-y: auto; /* ทำให้เลื่อนขึ้นลงในกรอบได้ */
+    -webkit-overflow-scrolling: touch; /* ช่วยให้การเลื่อนลื่นไหลบนมือถือ */
+}
 body {
   margin: 0;
 }

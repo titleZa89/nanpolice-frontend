@@ -195,9 +195,9 @@ function HomePage() {
             </div>
             <div style={{ padding: '10px', display: 'flex', justifyContent: 'center', width: '100%' }}>
   <iframe 
-    src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&tabs=timeline&width=500&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
+    src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpolice5.nan&tabs=timeline&width=500&height=1500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
     width="500" 
-    height="700" 
+    height="1500" 
     style={{ border: 'none', overflow: 'hidden', width: '100%', maxWidth: '500px' }} 
     allow="encrypted-media"
   ></iframe>
